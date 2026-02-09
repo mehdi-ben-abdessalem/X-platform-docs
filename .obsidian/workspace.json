@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/00-core-system-principles.md",
+                "file": "docs/12-ratings-and-reputation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-core-system-principles"
+              "title": "12-ratings-and-reputation"
             }
           }
         ],
@@ -123,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/00-core-system-principles.md",
+                "file": "docs/12-ratings-and-reputation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 00-core-system-principles"
+              "title": "Backlinks for 12-ratings-and-reputation"
             }
           },
           {
@@ -142,12 +142,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/00-core-system-principles.md",
+                "file": "docs/12-ratings-and-reputation.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 00-core-system-principles"
+              "title": "Outgoing links from 12-ratings-and-reputation"
             }
           },
           {
@@ -185,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/00-core-system-principles.md",
+                "file": "docs/12-ratings-and-reputation.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 00-core-system-principles"
+              "title": "Outline of 12-ratings-and-reputation"
             }
           }
         ]
@@ -212,11 +212,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "61b485dd99cae37c",
+  "active": "bbde8a4f4f1a20f5",
   "lastOpenFiles": [
-    "docs",
-    "docs/12-ratings-and-reputation.md",
     "docs/11-admin-and-safety.md",
+    "docs/12-ratings-and-reputation.md",
     "docs/10-session-completion.md",
     "docs/09-rescheduling-workflow.md",
     "docs/08-session-stopping-and-penalties.md",
@@ -227,6 +226,7 @@
     "docs/03-customer-entry-workflow.md",
     "docs/02-boost-structure.md",
     "docs/01-entities-and-states.md",
-    "docs/00-core-system-principles.md"
+    "docs/00-core-system-principles.md",
+    "docs"
   ]
 }

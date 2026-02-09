@@ -24,3 +24,34 @@
 - NO_OTHER_DUO
 
 All invalid combinations are blocked before payment.
+
+## Diagram — Boost Structure Overview
+
+```mermaid
+flowchart TD
+    Boost[Boost Order]
+
+    Boost --> QueueType
+    Boost --> ExecutionMode
+    Boost --> BoostGoal
+    Boost --> RankState
+    Boost --> Addons
+
+    QueueType --> SOLO_RANKED
+    QueueType --> FLEX_RANKED
+
+    ExecutionMode --> DUO_PLAY
+    ExecutionMode --> ACCOUNT_PLAY
+
+    BoostGoal --> RANK_TARGET
+    BoostGoal --> NET_WINS
+
+    RankState --> CurrentRank
+    RankState --> CurrentLP
+
+    Addons --> EXPRESS_ORDER
+    Addons --> VOICE_CHAT
+    Addons --> ACCOUNT_SWAP
+    Addons --> CHAMPION_LOCK
+    Addons --> NO_OTHER_DUO
+```

@@ -64,3 +64,23 @@ ONLINE_IN_SESSION
 ONLINE_PAUSED
 
 Only ONLINE_AVAILABLE boosters can receive work.
+
+## Diagram — Order & Session States
+
+```mermaid
+stateDiagram-v2
+    state Order {
+        ACTIVE --> COMPLETED
+        ACTIVE --> CANCELLED
+    }
+
+    state Session {
+        REQUESTED --> ACCEPTED
+        ACCEPTED --> IN_PROGRESS
+        IN_PROGRESS --> PAUSED
+        PAUSED --> IN_PROGRESS
+        IN_PROGRESS --> STOPPED
+        IN_PROGRESS --> COMPLETED
+        IN_PROGRESS --> FLAGGED
+    }
+```

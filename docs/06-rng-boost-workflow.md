@@ -48,3 +48,35 @@ All eligible boosters receive:
 
 ### STOPPED / FLAGGED / CANCELLED
 Handled via stop & penalty logic (see Section 8)
+
+## ## Diagram — RNG Boost End-to-End Flow
+
+```mermaid
+flowchart TD
+    A["Customer selects RNG Boost"] --> B["Customer pays upfront"]
+    B --> C["Order created (ACTIVE)"]
+    C --> D["Session created (REQUESTED, assignment_mode = RNG)"]
+    D --> E["System finds eligible boosters"]
+
+    E --> F["Notify all ONLINE_AVAILABLE boosters"]
+    F --> G{"Any booster clicks ACCEPT?"}
+
+    G -->|First accept| H["Atomic lock applied"]
+    H --> I["Booster assigned"]
+    I --> J["Session state = IN_PROGRESS"]
+
+    J --> K["Booster plays games"]
+    K --> L["System tracks rank, LP, wins"]
+
+    L --> M{"Goal achieved?"}
+
+    M -->|No| J
+    M -->|Yes| N["Session COMPLETED"]
+
+    N --> O["Chat disabled"]
+    O --> P["Payout released"]
+    P --> Q["Order COMPLETED"]
+
+    J --> R["Session STOPPED / FLAGGED / CANCELLED"]
+    R --> S["Handle via stop & penalty logic (Section 8)"]
+```

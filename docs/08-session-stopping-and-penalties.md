@@ -40,3 +40,31 @@ Stopping reason does not matter unless session is FLAGGED.
 - Remaining order price recalculated
 - Order remains ACTIVE
 - Customer may continue with a new booster
+
+## Diagram — Session Stop & Penalty Logic
+
+```mermaid
+flowchart TD
+    A["Session IN_PROGRESS"] --> B{"Session stopped by?"}
+
+    B -->|Customer| C["Session STOPPED"]
+    B -->|Booster| C
+    B -->|System| C
+
+    C --> D["Chat disabled immediately"]
+    D --> E["End rank & LP recorded"]
+    E --> F["Progress delta calculated"]
+
+    F --> G{"Progress delta?"}
+
+    G -->|Positive| H["Booster paid"]
+    G -->|Zero| I["No payout"]
+    G -->|Negative| J["Booster penalized"]
+
+    H --> K["Order state updated"]
+    I --> K
+    J --> K
+
+    K --> L["Order remains ACTIVE"]
+    L --> M["Customer may continue with new booster"]
+```

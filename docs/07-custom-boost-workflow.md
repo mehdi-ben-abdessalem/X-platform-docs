@@ -57,3 +57,35 @@ Same rules as RNG:
 - Chat only during IN_PROGRESS
 - Progress tracked
 - Add-ons enforced
+
+## Diagram — Custom Boost End-to-End Flow
+
+```mermaid
+flowchart TD
+    A["Customer browses boosters"] --> B["Customer selects booster"]
+    B --> C["Customer configures boost"]
+    C --> D["Custom request sent (no payment)"]
+
+    D --> E["Session created (REQUESTED, assignment_mode = CUSTOM)"]
+    E --> F["Booster reviews request"]
+
+    F --> G{"Booster decision"}
+
+    G -->|ACCEPT| H["Customer prompted to pay"]
+    H --> I["Customer pays"]
+    I --> J["Session state = IN_PROGRESS"]
+    J --> K["Chat enabled"]
+    K --> L["Session execution (play, progress tracked)"]
+
+    G -->|REQUEST RESCHEDULE| M["Booster proposes date & time"]
+    M --> N{"Customer decision"}
+
+    N -->|ACCEPT| O["Customer pays"]
+    O --> P["Session state = PAUSED"]
+    P --> Q["Session resumes at scheduled time"]
+    Q --> J
+
+    N -->|DECLINE| R["Session CANCELLED"]
+
+    G -->|DECLINE| R
+```
