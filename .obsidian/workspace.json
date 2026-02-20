@@ -4,249 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "fc5c71565027c926",
+        "id": "1c8c492e98895b44",
         "type": "tabs",
         "children": [
           {
-            "id": "baff37a5d7afa158",
+            "id": "7bb8dbee7a3d7293",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/11-admin-and-safety.md",
+                "file": "companion-section-docs/09-companion-session-execution.md.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11-admin-and-safety"
-            }
-          },
-          {
-            "id": "c7f413d1c4458868",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/11-admin-and-safety.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "11-admin-and-safety"
-            }
-          },
-          {
-            "id": "bbde8a4f4f1a20f5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/12-ratings-and-reputation.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "12-ratings-and-reputation"
-            }
-          },
-          {
-            "id": "ebb05453ddfb6772",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/13-companion-core-principles.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "13-companion-core-principles.md"
-            }
-          },
-          {
-            "id": "e86fce094d747e72",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/14-companion-entities-and-states.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "14-companion-entities-and-states.md"
-            }
-          },
-          {
-            "id": "b0578a530d92ff11",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/15-companion-service-structure.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "15-companion-service-structure.md"
-            }
-          },
-          {
-            "id": "69dfb4195aa37872",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/16-companion-booking-workflow.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "16-companion-booking-workflow.md"
-            }
-          },
-          {
-            "id": "a506ab5512d90608",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/17-companion-session-execution.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "17-companion-session-execution.md"
-            }
-          },
-          {
-            "id": "6e5f5d6dfad82702",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/18-companion-early-termination.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "18-companion-early-termination.md"
-            }
-          },
-          {
-            "id": "914d86a47d63c359",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/19-companion-custom-services.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "19-companion-custom-services.md"
-            }
-          },
-          {
-            "id": "4a53bf50ffa6ad0a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/05-companion-direct-booking-workflow.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "05-companion-direct-booking-workflow.md"
-            }
-          },
-          {
-            "id": "c40dbe45f624989b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/06-companion-rng-booking-workflow.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "06-companion-rng-booking-workflow.md"
-            }
-          },
-          {
-            "id": "f3beb405ff06efb0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/07-abandonment-and-cooldown-policy.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "07-abandonment-and-cooldown-policy.md"
-            }
-          },
-          {
-            "id": "5c2ae091efffaa31",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/12-companion-tipping-system.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "12-companion-tipping-system.md"
-            }
-          },
-          {
-            "id": "cceec72b48857559",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/14-off-platform-policy.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "14-off-platform-policy.md"
-            }
-          },
-          {
-            "id": "c531625169e984cf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/04-companion-service-structure.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "04-companion-service-structure.md"
-            }
-          },
-          {
-            "id": "b962aa42e5d76564",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "companion-section-docs/10-companion-early-termination.md.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "10-companion-early-termination.md"
+              "title": "09-companion-session-execution.md"
             }
           }
-        ],
-        "currentTab": 16
+        ]
       }
     ],
     "direction": "vertical"
@@ -408,23 +183,23 @@
       "bases:Create new base": false
     }
   },
-  "active": "b962aa42e5d76564",
+  "active": "7bb8dbee7a3d7293",
   "lastOpenFiles": [
-    "companion-section-docs/09-companion-session-execution.md.md",
-    "companion-section-docs/08-weighted-random-matching-system.md.md",
-    "companion-section-docs/07-abandonment-and-cooldown-policy.md.md",
-    "companion-section-docs/06-companion-rng-booking-workflow.md.md",
-    "companion-section-docs/05-companion-direct-booking-workflow.md.md",
-    "companion-section-docs/04-companion-service-structure.md.md",
-    "companion-section-docs/03-companion-order-lifecycle-overview.md.md",
-    "companion-section-docs/02-companion-entities-and-states.md.md",
-    "companion-section-docs/01-companion-core-principles.md.md",
-    "companion-section-docs/00-overview.md.md",
-    "companion-section-docs/10-companion-early-termination.md.md",
     "companion-section-docs/11-companion-custom-services.md.md",
     "companion-section-docs/12-companion-tipping-system.md.md",
     "companion-section-docs/13-companion-admin-and-moderation.md.md",
     "companion-section-docs/14-off-platform-policy.md.md",
+    "companion-section-docs/10-companion-early-termination.md.md",
+    "companion-section-docs/04-companion-service-structure.md.md",
+    "companion-section-docs/07-abandonment-and-cooldown-policy.md.md",
+    "companion-section-docs/06-companion-rng-booking-workflow.md.md",
+    "companion-section-docs/05-companion-direct-booking-workflow.md.md",
+    "companion-section-docs/09-companion-session-execution.md.md",
+    "companion-section-docs/08-weighted-random-matching-system.md.md",
+    "companion-section-docs/03-companion-order-lifecycle-overview.md.md",
+    "companion-section-docs/02-companion-entities-and-states.md.md",
+    "companion-section-docs/01-companion-core-principles.md.md",
+    "companion-section-docs/00-overview.md.md",
     "companion-section-docs",
     "README.md",
     "booster-section-docs/01-entities-and-states.md",

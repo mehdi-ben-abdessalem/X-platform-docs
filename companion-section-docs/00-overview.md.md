@@ -51,21 +51,44 @@ There are two booking paths:
 ## Direct Booking
 Customer selects a specific companion manually.
 Supports:
-- Instant booking
+- Instant booking (PER_GAME only)
 - Scheduled booking (with companion approval)
+- TIME_BASED bookings use handshake activation
 
 ## RNG Booking
 Customer selects a service first.
 System generates a weighted-random pool of eligible companions.
-Supports:
-- Instant booking only
+
+RNG supports:
+- Instant selection
 - Soft-reserve protection
 - Reroll system
 - Exposure balancing
 
+Activation still depends on service type (see below).
+
 ---
 
-# 4. Order vs Session
+# 4. Activation Model (Service-Type Based)
+
+Session activation depends on the service type, not the booking path.
+
+### TIME_BASED
+All TIME_BASED sessions (Direct and RNG) use a handshake activation model:
+
+Payment → READY (5-minute window) → Both Confirm → ACTIVE
+
+Timer starts only after both parties confirm.
+
+### PER_GAME
+PER_GAME sessions activate immediately after payment.
+
+### ONE_TIME
+ONE_TIME services are fulfilled immediately after payment confirmation.
+
+---
+
+# 5. Order vs Session
 
 The system separates:
 
@@ -82,6 +105,7 @@ Sessions handle:
 - Execution
 - Timing
 - Game count
+- Handshake activation (for TIME_BASED)
 - Active chat window
 - Early termination
 
@@ -89,7 +113,7 @@ This separation prevents state corruption and allows clear lifecycle control.
 
 ---
 
-# 5. Availability & Matching
+# 6. Availability & Matching
 
 Companion availability states determine eligibility:
 
@@ -108,13 +132,14 @@ RNG uses a weighted random matching system to:
 
 ---
 
-# 6. Abuse & Protection Systems
+# 7. Abuse & Protection Systems
 
 The Companion system includes:
 
 - Abandonment detection
 - Cooldown enforcement
 - Soft-reserve timers
+- Handshake timeout enforcement
 - Exposure balancing
 - Admin-level monitoring
 - Escrow-based payments
@@ -124,8 +149,9 @@ These mechanisms ensure both customer and companion protection.
 
 ---
 
-# 7. Off-Platform Boundaries
+# 8. Off-Platform Boundaries
 
+Off-platform voice communication is allowed.
 
 Off-platform payments are strictly prohibited.
 
@@ -133,7 +159,7 @@ Violations may result in suspension or permanent removal.
 
 ---
 
-# 8. Documentation Structure
+# 9. Documentation Structure
 
 This folder contains:
 
@@ -153,7 +179,7 @@ Each file documents one layer of the Companion system.
 
 ---
 
-# 9. System Objective
+# 10. System Objective
 
 The Companion system is designed to:
 

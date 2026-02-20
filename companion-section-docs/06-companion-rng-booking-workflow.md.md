@@ -10,7 +10,7 @@ RNG does NOT apply to:
 - ONE_TIME services
 - Scheduled bookings
 
-RNG always results in instant booking upon payment.
+Activation depends on service type.
 
 ---
 
@@ -78,21 +78,33 @@ All reservations automatically expire when:
 
 ---
 
-## 4. Companion Selection
+## 4. Companion Selection & Payment
 
 When customer selects a companion:
 
 - All other companions are immediately released
-- Order state → PENDING_PAYMENT
+- Order state → `PENDING_PAYMENT`
 - Exact companion price is displayed
 - Customer proceeds to payment
 
 Upon successful payment:
-- Order state → CONFIRMED
-- Session state → ACTIVE
-- Companion state → IN_SESSION
+- Order state → `CONFIRMED`
 
-Session begins immediately.
+Activation now depends on service type:
+
+### If PER_GAME:
+- Session → `ACTIVE`
+- Companion state → `IN_SESSION`
+- Chat enabled immediately
+
+### If TIME_BASED:
+- Session → `READY`
+- 5-minute handshake window begins
+- Companion remains `ONLINE_AVAILABLE`
+- After successful handshake → `ACTIVE`
+- Companion state → `IN_SESSION`
+
+Session execution begins only after activation rules are satisfied.
 
 ---
 
@@ -109,7 +121,7 @@ System:
 
 Cooldowns and abuse mitigation are defined in:
 
-23-abandonment-and-cooldown-policy.md
+`23-abandonment-and-cooldown-policy.md`
 
 ---
 
@@ -127,28 +139,37 @@ RNG statistics are tracked for admin use only and are not visible to companions 
 
 ---
 
-## Diagram — RNG Companion Booking Flow
+## Diagram — RNG Companion Booking Flow (Service-Type Aware)
 
 ```mermaid
 flowchart TD
 
-A["Customer Selects PER_GAME or TIME_BASED Service"] --> B{"Eligible Companions >= 3?"}
+A["Customer Selects PER_GAME or TIME_BASED"] --> B{"Eligible >= 3?"}
 
-B -->|No| C["RNG Disabled - Browse Only"]
-B -->|Yes| D["Start RNG Search - 60s Window"]
+B -->|No| C["RNG Disabled"]
+B -->|Yes| D["Start RNG Search - 60s"]
 
-D --> E["Up to 6 Companions Accept"]
+D --> E["Up to 6 Accept"]
 E --> F["SOFT_RESERVED Pool"]
 
 F --> G{"Customer Action"}
 
 G -->|Select| H["Order PENDING_PAYMENT"]
 H --> I["Customer Pays"]
-I --> J["Session ACTIVE"]
+I --> J["Order CONFIRMED"]
 
-G -->|Lock and Reroll| K["Release Non-Locked Companions"]
-K --> L["Refill Pool - 30s Window"]
+J --> K{"Service Type?"}
 
-G -->|Timeout or Leave| M["Release All"]
-M --> N["Record Abandonment"]
+K -->|PER_GAME| L["Session ACTIVE"]
+
+K -->|TIME_BASED| M["Session READY"]
+M --> N{"Both Confirm?"}
+N -->|Yes| L
+N -->|No| O["Session CANCELLED"]
+
+G -->|Lock and Reroll| P["Release Non-Locked"]
+P --> Q["Refill Pool - 30s"]
+
+G -->|Timeout| R["Release All"]
+R --> S["Record Abandonment"]
 ```

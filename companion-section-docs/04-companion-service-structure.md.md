@@ -37,6 +37,9 @@ Booking options:
 - Direct Scheduled Booking
 - RNG Companion Booking (mandatory participation)
 
+Activation:
+- Session becomes ACTIVE immediately after payment (Direct or RNG).
+
 Session ends when:
 - All games are completed
 - Or session is manually ended
@@ -66,7 +69,17 @@ Booking options:
 - Direct Scheduled Booking
 - RNG Companion Booking (mandatory participation)
 
-Timer starts when session becomes ACTIVE.
+Activation Model (All Booking Types):
+
+TIME_BASED services use handshake activation:
+
+Payment  
+→ Session enters READY (5-minute window)  
+→ Both parties confirm  
+→ Session becomes ACTIVE  
+→ Timer starts  
+
+Timer does NOT start at payment.
 
 Session ends when:
 - Selected duration expires
@@ -93,6 +106,9 @@ Customer purchases:
 
 Booking options:
 - Direct Instant Booking only
+
+Activation:
+- Fulfilled immediately after payment confirmation.
 
 ONE_TIME services:
 - Do not participate in RNG
@@ -122,10 +138,9 @@ B --> E["Direct Instant"]
 B --> F["Direct Scheduled"]
 B --> G["RNG Booking (Mandatory)"]
 
-C --> H["Direct Instant"]
-C --> I["Direct Scheduled"]
-C --> J["RNG Booking (Mandatory)"]
+C --> H["Direct Instant (Handshake)"]
+C --> I["Direct Scheduled (Handshake)"]
+C --> J["RNG Booking (Handshake)"]
 
 D --> K["Direct Instant Only"]
 ```
-

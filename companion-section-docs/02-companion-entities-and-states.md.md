@@ -44,16 +44,20 @@ PENDING_COMPANION_APPROVAL
 → Scheduled request awaiting companion response.
 
 PENDING_PAYMENT  
-→ Companion accepted (or instant booking created), awaiting customer payment.
+→ Companion accepted (or booking created), awaiting customer payment.
 
 CONFIRMED  
-→ Payment successful. Session is either ACTIVE or SCHEDULED.
+→ Payment successful. Session is created and enters:
+   - READY (TIME_BASED)
+   - ACTIVE (PER_GAME)
+   - Immediate fulfillment (ONE_TIME)
+   - SCHEDULED (future scheduled booking)
 
 COMPLETED  
 → Session ended normally.
 
 CANCELLED  
-→ Declined, expired, or cancelled before completion.
+→ Declined, expired, handshake failure, or cancelled before completion.
 
 FLAGGED  
 → Under admin review.
@@ -78,6 +82,7 @@ A Session represents the execution of a confirmed order.
 ## Session States
 
 - SCHEDULED
+- READY
 - ACTIVE
 - ENDED
 - FLAGGED
@@ -89,8 +94,18 @@ A Session represents the execution of a confirmed order.
 SCHEDULED  
 → Future session confirmed, waiting for start time.
 
+READY  
+→ TIME_BASED handshake phase (5-minute window).
+   - Timer not running.
+   - Both parties must confirm.
+   - Companion remains ONLINE_AVAILABLE.
+
 ACTIVE  
-→ Session currently running. Chat enabled.
+→ Session currently running.
+   - Timer running (TIME_BASED)
+   - Games tracked (PER_GAME)
+   - Companion state → IN_SESSION
+   - Chat enabled.
 
 ENDED  
 → Session finished normally or manually ended.
@@ -121,12 +136,14 @@ OFFLINE
 
 ONLINE_AVAILABLE  
 → Eligible for:
-   - Instant booking
+   - Instant booking (PER_GAME only)
    - RNG matching
    - Scheduled booking
+   - READY phase (TIME_BASED)
 
 IN_SESSION  
-→ Not eligible for:
+→ Session ACTIVE.
+   Not eligible for:
    - Instant booking
    - RNG matching  
    Eligible for:
@@ -148,7 +165,7 @@ SCHEDULED
 
 ---
 
-# Diagram — Order & Session Lifecycle
+# Diagram — Order & Session Lifecycle (Service-Type Aware)
 
 ```mermaid
 flowchart TD
@@ -157,23 +174,25 @@ A["Order: PENDING_COMPANION_APPROVAL"] -->|Companion Accepts| B["Order: PENDING_
 B --> C["Customer Pays"]
 C --> D["Order: CONFIRMED"]
 
-D --> E{"Scheduled?"}
+D --> E{"Service Type?"}
 
-E -->|Yes| F["Session: SCHEDULED"]
-F --> G["At Scheduled Time"]
-G --> H["Session: ACTIVE"]
+E -->|TIME_BASED| F["Session: READY (Handshake)"]
+F --> G{"Both Confirm?"}
+G -->|Yes| H["Session: ACTIVE"]
+G -->|No| I["Session: CANCELLED"]
 
-E -->|No| H["Session: ACTIVE"]
+E -->|PER_GAME| H
+E -->|ONE_TIME| J["Immediate Fulfillment"]
+E -->|Scheduled| K["Session: SCHEDULED"]
 
-H --> I{"Session Outcome"}
+H --> L{"Session Outcome"}
 
-I -->|Normal Completion| J["Session: ENDED"]
-J --> K["Order: COMPLETED"]
+L -->|Normal Completion| M["Session: ENDED"]
+M --> N["Order: COMPLETED"]
 
-I -->|Cancelled| L["Session: ENDED"]
-L --> M["Order: CANCELLED"]
+L -->|Cancelled| O["Session: ENDED"]
+O --> P["Order: CANCELLED"]
 
-I -->|Flagged| N["Session: FLAGGED"]
-N --> O["Order: FLAGGED"]
+L -->|Flagged| Q["Session: FLAGGED"]
+Q --> R["Order: FLAGGED"]
 ```
-

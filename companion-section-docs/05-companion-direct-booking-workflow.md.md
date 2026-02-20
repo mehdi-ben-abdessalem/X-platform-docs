@@ -4,6 +4,8 @@ This workflow applies to manual browsing and direct booking only.
 
 RNG booking is documented separately.
 
+Activation depends on service type.
+
 ---
 
 ## 1. Browse Companions
@@ -42,15 +44,27 @@ Instant booking requires the companion to be:
 - Not IN_SESSION  
 - Not SOFT_RESERVED (RNG)  
 
-### Instant Booking Steps
+---
+
+## Instant Booking Steps
 
 1. Order created → `PENDING_PAYMENT`
 2. Customer pays
 3. Order → `CONFIRMED`
-4. Session → `ACTIVE`
-5. Companion state → `IN_SESSION`
 
-Chat becomes enabled immediately.
+Activation now depends on service type:
+
+### If PER_GAME:
+- Session → `ACTIVE`
+- Companion state → `IN_SESSION`
+- Chat enabled immediately
+
+### If TIME_BASED:
+- Session → `READY`
+- 5-minute handshake window begins
+- Companion remains `ONLINE_AVAILABLE`
+- Session becomes `ACTIVE` only after both confirm
+- Upon activation → Companion state → `IN_SESSION`
 
 ---
 
@@ -108,13 +122,21 @@ After final time agreement:
 
 ---
 
-## 4. Session Activation
+## 4. Scheduled Session Activation
 
-At scheduled time:
+At scheduled start time:
 
+### If PER_GAME:
 - Session → `ACTIVE`
 - Companion state → `IN_SESSION`
 - Chat enabled
+
+### If TIME_BASED:
+- Session → `READY`
+- 5-minute handshake window begins
+- Companion remains `ONLINE_AVAILABLE`
+- After successful handshake → `ACTIVE`
+- Companion state → `IN_SESSION`
 
 ---
 
@@ -123,12 +145,15 @@ At scheduled time:
 ### ONLINE_AVAILABLE
 - Can be booked instantly.
 - Can receive scheduled requests.
+- Remains ONLINE_AVAILABLE during READY phase.
 
 ### IN_SESSION
+- Session is ACTIVE.
 - Cannot be booked instantly.
 - Can receive scheduled requests for future time.
 
 ### SCHEDULED
+- Has future confirmed session.
 - Cannot be booked instantly during overlapping time.
 - Can receive additional scheduled requests outside overlapping windows.
 
@@ -138,7 +163,7 @@ At scheduled time:
 
 ---
 
-## Diagram — Direct Booking Flow
+## Diagram — Direct Booking Flow (Service-Type Aware)
 
 ```mermaid
 flowchart TD
@@ -150,17 +175,30 @@ C --> D{"Instant or Scheduled?"}
 D -->|Instant| E["Create Order: PENDING_PAYMENT"]
 E --> F["Customer Pays"]
 F --> G["Order CONFIRMED"]
-G --> H["Session ACTIVE"]
 
-D -->|Scheduled| I["Create Order: PENDING_COMPANION_APPROVAL"]
-I --> J{"Companion Decision"}
+G --> H{"Service Type?"}
 
-J -->|Accept| K["Order PENDING_PAYMENT"]
-K --> L["Customer Pays"]
-L --> M["Order CONFIRMED"]
-M --> N["Session SCHEDULED"]
-N --> O["At Scheduled Time: ACTIVE"]
+H -->|PER_GAME| I["Session ACTIVE"]
+H -->|TIME_BASED| J["Session READY"]
 
-J -->|Propose New Time| I
-J -->|Decline| P["Order CANCELLED"]
+J --> K{"Both Confirm?"}
+K -->|Yes| I
+K -->|No| L["Session CANCELLED"]
+
+D -->|Scheduled| M["Create Order: PENDING_COMPANION_APPROVAL"]
+M --> N{"Companion Decision"}
+
+N -->|Accept| O["Order PENDING_PAYMENT"]
+O --> P["Customer Pays"]
+P --> Q["Order CONFIRMED"]
+Q --> R["Session SCHEDULED"]
+
+R --> S["At Scheduled Time"]
+S --> T{"Service Type?"}
+
+T -->|PER_GAME| I
+T -->|TIME_BASED| J
+
+N -->|Propose New Time| M
+N -->|Decline| U["Order CANCELLED"]
 ```
