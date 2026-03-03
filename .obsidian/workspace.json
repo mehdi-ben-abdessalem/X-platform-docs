@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "companion-section-docs/09-companion-session-execution.md.md",
+                "file": "financial-docs/Technical Money Flow In DataBase.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "09-companion-session-execution.md"
+              "title": "Technical Money Flow In DataBase"
             }
           }
         ]
@@ -185,6 +185,9 @@
   },
   "active": "7bb8dbee7a3d7293",
   "lastOpenFiles": [
+    "financial-docs/How money moves in our Platform.md",
+    "financial-docs/Technical Money Flow In DataBase.md",
+    "financial-docs",
     "companion-section-docs/11-companion-custom-services.md.md",
     "companion-section-docs/12-companion-tipping-system.md.md",
     "companion-section-docs/13-companion-admin-and-moderation.md.md",
@@ -210,8 +213,6 @@
     "booster-section-docs/09-rescheduling-workflow.md",
     "booster-section-docs/08-session-stopping-and-penalties.md",
     "booster-section-docs/07-custom-boost-workflow.md",
-    "booster-section-docs/06-rng-boost-workflow.md",
-    "booster-section-docs/05-order-pricing-and-payment.md",
     "booster-section-docs"
   ]
 }
